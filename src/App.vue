@@ -1,17 +1,22 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Quiz :kanji="kanji"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import kanji from "./assets/kanji.json";
+import Quiz from './pages/Quiz.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Quiz
+  },
+  data () {
+    return {
+      kanji: kanji.items
+    }
   }
 }
 </script>
