@@ -16,7 +16,8 @@ export default {
           index: 0,
           correct: 0,
           incorrect: 0,
-          choices: []
+          choices: [],
+          status: 'unanswered'
       }
   },
   computed: {
@@ -26,24 +27,30 @@ export default {
       })
     },
     currentKanji () {
-      return this.kanjiAccordingToLevel[this.index];
+      return this.randomKanjiAccordingToLevel[this.index];
+    },
+    randomKanjiAccordingToLevel () {
+      return this.shuffleArray(this.kanjiAccordingToLevel);
+    },
+    isAnswered () {
+      return this.status !== 'unanswered';
     }
   },
   methods: {
     generateChoices () {
       this.choices = [];
-      this.choices.push(this.kanjiAccordingToLevel[this.index]);
+      this.choices.push(this.randomKanjiAccordingToLevel[this.index]);
 
       while(this.choices.length < 4) {
-        let randomKanjiNumber = Math.floor(Math.random() * this.kanjiAccordingToLevel.length);
-        if(!this.choices.includes(this.kanjiAccordingToLevel[randomKanjiNumber])) {
-          this.choices.push(this.kanjiAccordingToLevel[randomKanjiNumber]);
+        let randomKanjiNumber = Math.floor(Math.random() * this.randomKanjiAccordingToLevel.length);
+        if(!this.choices.includes(this.randomKanjiAccordingToLevel[randomKanjiNumber])) {
+          this.choices.push(this.randomKanjiAccordingToLevel[randomKanjiNumber]);
         }
       }
 
-      this.choices = this.shuffleChoices(this.choices);
+      this.choices = this.shuffleArray(this.choices);
     },
-    shuffleChoices (array) {
+    shuffleArray (array) {
       let currentIndex = array.length, randomIndex;
 
       while (currentIndex != 0) {
@@ -56,18 +63,31 @@ export default {
       return array;
     },
     checkAnswer (answer) {
-      if(answer == this.currentKanji.keyword) {
-        this.correct++;
+      if(this.isAnswered) {
+        return
       } 
       else {
-        this.incorrect++;
+        if(answer == this.currentKanji.keyword) {
+          this.correct++;
+          this.status = 'correct'
+        } 
+        else {
+          this.incorrect++;
+          this.status = 'incorrect'
+        }
       }
+      // this.index++;
+    },
+    nextQuestion () {
       this.index++;
+      this.status = 'unanswered'
     }
   },
   watch: {
     level () {
       this.index = 0;
+      this.correct = 0;
+      this.incorrect = 0;
       this.generateChoices();
     },
     index () {
