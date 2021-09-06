@@ -20,7 +20,23 @@
         />
       </div>
     </div>
-    <button class="next" v-show="isAnswered" @click="nextQuestion">Next</button>
+    <button class="next" v-show="isAnswered && !isFinished" @click="nextQuestion">Next</button>
+    <button class="next" v-show="isAnswered && isFinished" @click="showModal = true">Finish</button>
+    <modal v-if="showModal">
+      <template v-slot:header>
+        <h1>Result</h1>
+      </template>
+
+      <template v-slot:body>
+        <h1>Result: {{ getResult }}</h1>
+      </template>
+
+      <template v-slot:footer>
+        <div>
+          <button @click="closeModal">Close</button>
+        </div>
+      </template>
+    </modal>
   </div>
 </template>
 <script src="./js/quiz.js"></script>
