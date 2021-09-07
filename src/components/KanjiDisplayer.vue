@@ -1,9 +1,9 @@
 <template>
   <div class="card" :class="{correct: isCorrect, incorrect: isIncorrect}">
-    <p>{{ currentKanji.kanji }}</p>
+    <p class="kanji">{{ currentKanji.kanji }}</p>
     <div class="description" v-show="isAnswered">
-      <p>{{ currentKanji.keyword }}</p>
-      <p>{{ currentKanji.story }}</p>
+      <p class="keyword">{{ currentKanji.keyword }}</p>
+      <p class="story">{{ currentKanji.story }}</p>
     </div>
   </div>
 </template>
@@ -12,18 +12,36 @@
 .card {
   display: flex;
   border: 3px solid #666;
-  width: 40%;
+  width: 100%;
   height: 400px;
   font-size: 60px;
   border-radius: 15px;
   justify-content: center;
   align-items: center;
-  margin: 10px;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
+  box-shadow: 0 3px 10px -2px rgb(0 0 0 / 20%);
+}
+
+.kanji {
+  padding: 0px 30px;
 }
 
 .description {
   font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 20px;
+}
+
+.keyword{
+  font-size: 28px;
+}
+
+.story {
+  display: flex;
+  justify-content: start;
 }
 
 .incorrect {
@@ -36,7 +54,7 @@
 
 @media only screen and (max-width: 900px){
   .card {
-    width: 85%;
+    width: 100%;
   }
 }
 </style>

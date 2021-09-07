@@ -10,7 +10,9 @@
       <option value="1">N1</option>
     </select>
     <div class="container">
-      <KanjiDisplayer :currentKanji="currentKanji" :status="status"/>
+      <div class="kanji-viewer">
+        <KanjiDisplayer :currentKanji="currentKanji" :status="status"/>
+      </div>
       <div class="grid-option">
         <Option 
           v-for="choice in choices"
@@ -45,6 +47,12 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  flex-wrap: wrap;
+}
+.kanji-viewer {
+  display: flex;
+  margin: 20px;
+  width: 40%;
 }
 .grid-option {
   display: flex;
@@ -61,11 +69,13 @@
 
 @media only screen and (max-width: 900px){
   .container {
-    flex-direction: column;
     justify-items: center;
   }
+  .kanji-viewer {
+    width: 80%;
+  }
   .grid-option {
-    width: 100%;
+    width: 80%;
   }
 }
 </style>
