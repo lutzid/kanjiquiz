@@ -40,8 +40,7 @@
 }
 
 .story {
-  display: flex;
-  justify-content: start;
+  text-align: justify;
 }
 
 .incorrect {
