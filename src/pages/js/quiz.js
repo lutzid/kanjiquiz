@@ -1,13 +1,15 @@
 import KanjiDisplayer from "../../components/KanjiDisplayer.vue";
 import Option from "../../components/Option.vue";
 import Modal from "../../components/modal/Result.vue";
+import Navbar from "../../components/Navbar.vue"
 
 export default {
   name: "Quiz",
   components: {
     KanjiDisplayer,
     Option,
-    Modal
+    Modal,
+    Navbar
   },
   props: {
     kanji: Array,
@@ -25,26 +27,29 @@ export default {
     };
   },
   computed: {
-    kanjiAccordingToLevel() {
+    kanjiAccordingToLevel () {
       return this.kanji.filter((item) => {
         return item.jlpt_id == this.level;
       });
     },
-    currentKanji() {
+    currentKanji () {
       return this.randomKanjiAccordingToLevel[this.index];
     },
-    randomKanjiAccordingToLevel() {
+    randomKanjiAccordingToLevel () {
       return this.shuffleArray(this.kanjiAccordingToLevel);
     },
-    isAnswered() {
+    isAnswered () {
       return this.status !== "unanswered";
     },
-    getResult() {
+    getResult () {
       return Math.floor((this.correct / (this.correct + this.incorrect)) * 100);
     },
-    isFinished() {
+    isFinished () {
       return this.index === this.randomKanjiAccordingToLevel.length - 1;
     },
+    remaining () {
+      return this.randomKanjiAccordingToLevel.length - (this.correct + this.incorrect);
+    }
   },
   methods: {
     generateChoices() {

@@ -21,6 +21,7 @@
   flex-direction: row;
   justify-content: center;
   box-shadow: 0 3px 10px -2px rgb(0 0 0 / 20%);
+  background: #fff;
 }
 
 .kanji {

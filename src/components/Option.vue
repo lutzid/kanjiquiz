@@ -16,6 +16,8 @@
   margin-bottom: 20px;
   border: none;
   box-shadow: 0 3px 10px -2px rgb(0 0 0 / 20%);
+  background: #fff;
+  border-radius: 5px;
 }
 
 /* @media only screen and (min-width: 900px){
