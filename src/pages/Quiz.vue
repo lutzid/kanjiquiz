@@ -31,19 +31,19 @@
       </div>
     </div>
     <button class="next" v-show="isAnswered && !isFinished" @click="nextQuestion">Next</button>
-    <button class="next" v-show="isAnswered && isFinished" @click="showModal = true">Finish</button>
+    <button class="finish" v-show="isAnswered && isFinished" @click="showModal = true">Finish</button>
     <modal v-if="showModal">
       <template v-slot:header>
         <h1>Result</h1>
       </template>
 
       <template v-slot:body>
-        <h1>Result: {{ getResult }}</h1>
+        <h3>Your Score is {{ getResult }}</h3>
       </template>
 
       <template v-slot:footer>
         <div>
-          <button @click="closeModal">Close</button>
+          <button class="close" @click="closeModal">Close</button>
         </div>
       </template>
     </modal>
@@ -75,6 +75,30 @@
 }
 .next {
   cursor: pointer;
+  background-color: #2ed518;
+  border: none;
+  padding: 20px 30px;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 20px;
+}
+.finish {
+  cursor: pointer;
+  background-color: #2ed518;
+  border: none;
+  padding: 20px 30px;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 20px;
+}
+.close {
+  cursor: pointer;
+  background-color: #2ed518;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 15px;
 }
 .status {
   display: flex;
@@ -109,6 +133,12 @@ select {
   }
   .grid-option {
     width: 80%;
+  }
+  .level-status {
+    margin: 0px;
+  }
+  .answer-status {
+    margin: 0px;
   }
 }
 </style>
